@@ -40,6 +40,23 @@ module.exports = {
     //Escribir en el Json la nueva data
     this.writeFile(productsUpdated);
   },
+
+  update(id, productData) {
+    //Tomar la data de los productos
+    let products = this.readFile();
+    //modificar la info de productos
+    let productsUpdated = products.map((e) => {
+      if (e.id == id) {
+        e = {
+          id: e.id,
+          ...productData,
+        };
+      }
+      return e;
+    });
+    //escribir el archivo Json
+    this.writeFile(productsUpdated);
+  },
   delete(id) {
     let products = this.readFile();
     let productsNew = products.filter((e) => e.id != id);

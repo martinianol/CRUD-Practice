@@ -33,11 +33,16 @@ const controller = {
 
   // Update - Form to edit
   edit: (req, res) => {
-    // Do the magic
+    let id = req.params.id;
+    let productToEdit = productModel.findByPk(id);
+    res.render('product-edit-form', { productToEdit });
   },
   // Update - Method to update
   update: (req, res) => {
-    // Do the magic
+    let id = req.params.id;
+    let productData = req.body;
+    productModel.update(id, productData);
+    res.redirect('/products');
   },
 
   // Delete - Delete one product from DB
