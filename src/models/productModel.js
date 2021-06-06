@@ -1,9 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-
 module.exports = {
   filePath: path.join(__dirname, '../data/productsDataBase.json'),
 
@@ -25,6 +22,23 @@ module.exports = {
     let products = this.readFile();
     let productFound = products.find((e) => e.id == id);
     return productFound;
+  },
+
+  generateId() {
+    let products = this.readFile();
+    let lastProduct = products.pop();
+    return lastProduct.id + 1;
+  },
+
+  create(newProduct) {
+    //Tomar la data de los productos
+    let products = this.readFile();
+    //Genero ID del nuevo productoo
+    newProduct.id = this.generateId;
+    //Updeteo el array de productos
+    let productsUpdated = [...products, newProduct];
+    //Escribir en el Json la nueva data
+    this.writeFile(productsUpdated);
   },
   delete(id) {
     let products = this.readFile();

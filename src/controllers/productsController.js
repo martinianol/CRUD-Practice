@@ -21,12 +21,14 @@ const controller = {
 
   // Create - Form to create
   create: (req, res) => {
-    // Do the magic
+    res.render('product-create-form');
   },
 
   // Create -  Method to store
   store: (req, res) => {
-    // Do the magic
+    let newProductData = req.body;
+    productModel.create(newProductData);
+    res.redirect('/products');
   },
 
   // Update - Form to edit
@@ -42,7 +44,7 @@ const controller = {
   destroy: (req, res) => {
     let id = req.params.id;
     productModel.delete(id);
-    res.redirect('/products-list');
+    res.redirect('/products');
   },
 };
 
