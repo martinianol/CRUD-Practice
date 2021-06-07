@@ -35,6 +35,7 @@ const controller = {
   edit: (req, res) => {
     let id = req.params.id;
     let productToEdit = productModel.findByPk(id);
+    console.log(productToEdit);
     res.render('product-edit-form', { productToEdit });
   },
   // Update - Method to update
