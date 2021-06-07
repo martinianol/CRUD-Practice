@@ -49,7 +49,11 @@ module.exports = {
       if (e.id == id) {
         e = {
           id: e.id,
+          name: productData.name,
+          price: Number(productData.price),
+          discount: Number(productData.discount),
           ...productData,
+          image: e.image,
         };
       }
       return e;
