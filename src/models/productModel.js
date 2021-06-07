@@ -44,6 +44,7 @@ module.exports = {
   update(id, productData) {
     //Tomar la data de los productos
     let products = this.readFile();
+
     //modificar la info de productos
     let productsUpdated = products.map((e) => {
       if (e.id == id) {
@@ -55,9 +56,11 @@ module.exports = {
           ...productData,
           image: e.image,
         };
+        console.log(e);
       }
       return e;
     });
+
     //escribir el archivo Json
     this.writeFile(productsUpdated);
   },
