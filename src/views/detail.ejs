@@ -25,7 +25,7 @@
               class="product-detail-img"
             />
             <p class="product-detail-description">
-              <%=productDetail.descripton%>
+              <%=productDetail.description%>
             </p>
           </div>
           <div class="col-12 col-lg-4">
@@ -38,10 +38,16 @@
                 <b><%=productDetail.discount%>% OFF</b>
               </p>
               <p class="product-detail-price">
-                Precio Final: $<%=productDetail.price *
-                (100-productDetail.discount)/100 %>
+                <%const toThousand = (n) =>
+                n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') %> Precio
+                Real: $<%= toThousand(productDetail.price)%>
               </p>
-
+              <% if (productDetail.discount != 0) { %>
+              <p class="product-detail-price">
+                Precio Final: $<%= toThousand(productDetail.price *
+                (100-productDetail.discount))/100 %>
+              </p>
+              <%}%>
               <ul class="actions-list">
                 <li>
                   <i class="fas fa-credit-card"></i>

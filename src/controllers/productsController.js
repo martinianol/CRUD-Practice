@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+//const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
 const productModel = require('../models/productModel');
 
@@ -41,6 +41,7 @@ const controller = {
   update: (req, res) => {
     let id = req.params.id;
     let productData = req.body;
+    console.log(productData);
     productModel.update(id, productData);
     res.redirect('/products');
   },

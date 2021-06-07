@@ -38,29 +38,29 @@
   {
     "id": 5,
     "name": "Nikon Reflex D3500 - Kit",
+    "price": "64000",
+    "discount": "20",
+    "category": "in-sale",
     "description": "Incluye la cámara D3500, el objetivo zoom AF-P DX NIKKOR 18-55mm y el superteleobjetivo zoom compacto AF-P DX NIKKOR 70-300mm. Ambos objetivos enfocan de forma rápida y silenciosa, lo que resulta ideal para grabar metraje de vídeo sin que se escuche apenas el ruido del accionamiento.",
-    "price": 53000,
-    "discount": 20,
-    "image": "img-camara-nikon.jpg",
-    "category": "in-sale"
+    "image": "img-camara-nikon.jpg"
   },
   {
     "id": 6,
     "name": "Aire Acondicionado 3200w Frio / Calor",
+    "price": "45000",
+    "discount": "12",
+    "category": "in-sale",
     "description": "AIRE SPLIT 3200W TACA-3200WCHSA/KC FC TCL. Capacidad frio 3200 Watts. Capacidad calor 3300 Watts. Potencia Electrica(W)frio 996. Potencia Electrica(W)calor 1028. Eficiencia energética calor C. Eficiencia energética frio A. Frigorias 2750 UNIDAD INTERIOR. Peso Bruto 10kg. Peso Neto 7 kg",
-    "price": 20999,
-    "discount": 12,
-    "image": "img-aire-acondicionado.jpg",
-    "category": "in-sale"
+    "image": "img-aire-acondicionado.jpg"
   },
   {
     "id": 7,
     "name": "Notebook Lenovo I3 Intel 8gb Ram",
+    "price": "36700",
+    "discount": "25",
+    "category": "in-sale",
     "description": "PROCESADOR / CHIPSET. CPU: Intel Core i3(8a generación) 8130U / 2.2 GHz. Velocidad turbo máxima: 3, 4 GHz. Numero de núcleos: Doble núcleo. Cache: 4 MB. Arquitectura de 64 bit: ss. MEMORIA CACHÉ. Tamaño instalada: 4 MB. ALMACENAMIENTO. Interfaz Serial ATA - 600",
-    "price": 36700,
-    "discount": 5,
-    "image": "img-laptop-lenovo.jpg",
-    "category": "in-sale"
+    "image": "img-laptop-lenovo.jpg"
   },
   {
     "id": 8,
