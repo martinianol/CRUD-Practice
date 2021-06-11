@@ -27,7 +27,10 @@ const controller = {
   // Create -  Method to store
   store: (req, res) => {
     let newProductData = req.body;
-    productModel.create(newProductData);
+    let newFile = req.file;
+    console.log(newProductData);
+    console.log(newFile);
+    productModel.create(newProductData, newFile);
     res.redirect('/products');
   },
 

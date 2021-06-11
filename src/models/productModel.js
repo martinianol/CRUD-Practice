@@ -6,7 +6,9 @@ module.exports = {
 
   readFile() {
     let productsJson = fs.readFileSync(this.filePath, 'utf-8');
-    return JSON.parse(productsJson);
+    products = JSON.parse(productsJson);
+
+    return products;
   },
 
   writeFile(newData) {
@@ -30,11 +32,11 @@ module.exports = {
     return lastProduct.id + 1;
   },
 
-  create(newProduct) {
+  create(newProduct, newFile) {
     //Tomar la data de los productos
     let products = this.readFile();
     //Genero ID del nuevo productoo
-    newProduct.id = this.generateId;
+    newProduct.id = this.generateId();
     //Updeteo el array de productos
     let productsUpdated = [...products, newProduct];
     //Escribir en el Json la nueva data
