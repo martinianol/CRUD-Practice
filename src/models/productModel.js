@@ -67,12 +67,11 @@ module.exports = {
   delete(id) {
     let products = this.readFile();
     let productsNew = products.filter((e) => e.id != id);
-    let product = products.find((e) => e.id == id);
-    console.log(product);
+    let productToDelete = products.find((e) => e.id == id);
     let fileToDeletePath = path.join(
       __dirname,
       '../../public/images/products',
-      product.image
+      productToDelete.image
     );
 
     fs.unlinkSync(fileToDeletePath);
