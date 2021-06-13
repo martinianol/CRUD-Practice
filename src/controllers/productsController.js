@@ -28,8 +28,12 @@ const controller = {
   store: (req, res) => {
     let newProductData = req.body;
     let newFile = req.file;
-    console.log(newProductData);
-    console.log(newFile);
+    //Transform the string values into numbers
+    newProductData.price = Number(newProductData.price);
+    newProductData.discount = Number(newProductData.discount);
+    //Specify the image name
+    newProductData.image = newFile.filename;
+
     productModel.create(newProductData, newFile);
     res.redirect('/products');
   },
@@ -38,14 +42,14 @@ const controller = {
   edit: (req, res) => {
     let id = req.params.id;
     let productToEdit = productModel.findByPk(id);
-    console.log(productToEdit);
     res.render('product-edit-form', { productToEdit });
   },
   // Update - Method to update
   update: (req, res) => {
     let id = req.params.id;
     let productData = req.body;
-    console.log(productData);
+    productData.price = Number(productData.price);
+    productData.discount = Number(productData.discount);
     productModel.update(id, productData);
     res.redirect('/products');
   },

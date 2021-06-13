@@ -38,6 +38,7 @@ module.exports = {
     //Genero ID del nuevo productoo
     newProduct.id = this.generateId();
     //Updeteo el array de productos
+
     let productsUpdated = [...products, newProduct];
     //Escribir en el Json la nueva data
     this.writeFile(productsUpdated);
@@ -52,9 +53,6 @@ module.exports = {
       if (e.id == id) {
         e = {
           id: e.id,
-          name: productData.name,
-          price: Number(productData.price),
-          discount: Number(productData.discount),
           ...productData,
           image: e.image,
         };
@@ -69,6 +67,15 @@ module.exports = {
   delete(id) {
     let products = this.readFile();
     let productsNew = products.filter((e) => e.id != id);
+    let product = products.find((e) => e.id == id);
+    console.log(product);
+    let fileToDeletePath = path.join(
+      __dirname,
+      '../../public/images/products',
+      product.image
+    );
+
+    fs.unlinkSync(fileToDeletePath);
     this.writeFile(productsNew);
   },
 };
