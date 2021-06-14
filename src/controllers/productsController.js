@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { validationResult } = require('express-validator');
+
 //const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
 const productModel = require('../models/productModel');
@@ -28,14 +30,26 @@ const controller = {
   store: (req, res) => {
     let newProductData = req.body;
     let newFile = req.file;
-    //Transform the string values into numbers
-    newProductData.price = Number(newProductData.price);
-    newProductData.discount = Number(newProductData.discount);
-    //Specify the image name
-    newProductData.image = newFile.filename;
 
-    productModel.create(newProductData, newFile);
-    res.redirect('/products');
+    //Validation
+    let errors = validationResult(req);
+
+    if (errors.isEmpty()) {
+      //Transform the string values into numbers
+      newProductData.price = Number(newProductData.price);
+      newProductData.discount = Number(newProductData.discount);
+      //Specify the image name
+      newProductData.image = newFile.filename;
+
+      productModel.create(newProductData, newFile);
+      res.redirect('/products');
+    } else {
+      console.log(errors.mapped());
+      res.render('product-create-form', {
+        errors: errors.mapped(),
+        old: req.body,
+      });
+    }
   },
 
   // Update - Form to edit

@@ -29,6 +29,9 @@
                 placeholder="Ej: Zapatillas Reebok"
                 class="form-input"
               />
+              <% if (locals.errors && errors.name) { %>
+              <p class="feedback"><%=errors.name%></p>
+              <%}%>
             </div>
             <div class="col-12 col-md-6">
               <label for="price" class="form-label">Precio del producto:</label>

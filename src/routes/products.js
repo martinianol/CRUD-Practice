@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const { check } = require('express-validator');
 
 // ************ Controller Require ************
 const productsController = require('../controllers/productsController');
@@ -25,6 +26,31 @@ const storage = multer.diskStorage({
 
 const uploadFile = multer({ storage });
 
+/***VALIDATION  ***/
+const validateRegister = [
+  check('price')
+    .notEmpty()
+    .withMessage('Favor de ingresar el precio del producto')
+    .bail()
+    .toInt(),
+
+  check('discount')
+    .notEmpty()
+    .withMessage('Favor de ingresar el descuento del producto')
+    .bail()
+    .toInt(),
+
+  check('description')
+    .notEmpty()
+    .withMessage('Favor de ingresar la descripción del producto')
+    .isLength({ min: 10 })
+    .withMessage('La descripción es muy corta'),
+  check('category'),
+  check('product_image')
+    .isEmpty()
+    .withMessage('Favor de seleccionar una imagen'),
+];
+
 /*** GET ALL PRODUCTS ***/
 router.get('/', productsController.list);
 
@@ -32,7 +58,7 @@ router.get('/', productsController.list);
 router.get('/create', productsController.create);
 router.post(
   '/create',
-  uploadFile.single('product_image'),
+  [uploadFile.single('product_image'), validateRegister],
   productsController.store
 );
 
