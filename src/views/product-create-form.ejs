@@ -5,7 +5,6 @@
   <body>
     <!-- Header -->
     <%- include('partials/headerNavbar') %>
-    <!-- /Header -->
 
     <div class="container products-wrapper">
       <div class="row">
@@ -28,9 +27,10 @@
                 name="name"
                 placeholder="Ej: Zapatillas Reebok"
                 class="form-input"
+                value="<%= (locals.oldData && oldData.name) ? oldData.name : null%>"
               />
               <% if (locals.errors && errors.name) { %>
-              <p class="feedback"><%=errors.name%></p>
+              <p class="feedback"><%=errors.name.msg%></p>
               <%}%>
             </div>
             <div class="col-12 col-md-6">
@@ -41,7 +41,11 @@
                 name="price"
                 placeholder="Ej: 5678"
                 class="form-input"
+                value="<%= (locals.oldData && oldData.price) ? oldData.price : null%>"
               />
+              <% if (locals.errors && errors.price) { %>
+              <p class="feedback"><%=errors.price.msg%></p>
+              <%}%>
             </div>
             <div class="col-12 col-md-6">
               <label for="discount" class="form-label">Descuento:</label>
@@ -51,15 +55,22 @@
                 name="discount"
                 placeholder="Ej: 15"
                 class="form-input"
+                value="<%= (locals.oldData && oldData.discount) ? oldData.discount : null%>"
               />
+              <% if (locals.errors && errors.discount) { %>
+              <p class="feedback"><%=errors.discount.msg%></p>
+              <%}%>
             </div>
             <div class="col-12 col-md-6">
               <label for="category" class="form-label">Categoría:</label>
               <select name="category" id="category" class="form-input">
                 <option value="">Elegí</option>
-                <option value="in-sale">En oferta</option>
-                <option value="visited">Últimos agregados</option>
+                <option value= "in-sale" <%= (locals.oldData && oldData.category =='in-sale') ? 'selected': null%>>En oferta</option>
+                <option value="visited" <%= (locals.oldData && oldData.category =='visited') ? 'selected': null%>>Últimos agregados</option>
               </select>
+              <% if (locals.errors && errors.category) { %>
+              <p class="feedback"><%=errors.category.msg%></p>
+              <%}%>
             </div>
             <div class="col-12">
               <label for="description" class="form-label">Descipción:</label>
@@ -67,7 +78,11 @@
                 name="description"
                 id="description"
                 class="form-input"
-              ></textarea>
+                value=""
+              ><%= (locals.oldData && oldData.description) ? oldData.description : null%></textarea>
+              <% if (locals.errors && errors.description) { %>
+              <p class="feedback"><%=errors.description.msg%></p>
+              <%}%>
             </div>
 
             <div class="col-12 col-md-6">
@@ -78,6 +93,9 @@
                 name="product_image"
                 class="form-input"
               />
+              <% if (locals.errors && errors.product_image) { %>
+                <p class="feedback"><%=errors.product_image.msg%></p>
+              <%}%>
             </div>
 
             <div class="col-12">
@@ -89,7 +107,6 @@
         </form>
       </div>
     </div>
-    <!-- /todos los productos -->
 
     <!-- footer -->
     <%- include('partials/footer') %>

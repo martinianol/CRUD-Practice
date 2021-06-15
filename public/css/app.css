@@ -406,6 +406,11 @@ textarea.form-input {
   padding: 15px;
 }
 
+.feedback {
+  color: red;
+  font-weight: bold;
+}
+
 /*====== Media-Queries ======*/
 @media (min-width: 768px) {
   .main-header_credit-link {

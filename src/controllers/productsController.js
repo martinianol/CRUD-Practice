@@ -40,14 +40,13 @@ const controller = {
       newProductData.discount = Number(newProductData.discount);
       //Specify the image name
       newProductData.image = newFile.filename;
-
+      //Create the new product
       productModel.create(newProductData, newFile);
       res.redirect('/products');
     } else {
-      console.log(errors.mapped());
       res.render('product-create-form', {
         errors: errors.mapped(),
-        old: req.body,
+        oldData: req.body,
       });
     }
   },

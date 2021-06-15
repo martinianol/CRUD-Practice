@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const { check } = require('express-validator');
+const { body } = require('express-validator');
 
 // ************ Controller Require ************
 const productsController = require('../controllers/productsController');
@@ -28,27 +28,46 @@ const uploadFile = multer({ storage });
 
 /***VALIDATION  ***/
 const validateRegister = [
-  check('price')
+  body('name').notEmpty().withMessage('Favor de ingresar el nombre del producto'),
+  body('price')
     .notEmpty()
     .withMessage('Favor de ingresar el precio del producto')
     .bail()
     .toInt(),
 
-  check('discount')
+  body('discount')
     .notEmpty()
     .withMessage('Favor de ingresar el descuento del producto')
     .bail()
     .toInt(),
 
-  check('description')
+  body('category').notEmpty().withMessage('Favor de elegir una opción de categoría'),
+
+  body('description')
     .notEmpty()
     .withMessage('Favor de ingresar la descripción del producto')
+    .bail()
     .isLength({ min: 10 })
     .withMessage('La descripción es muy corta'),
-  check('category'),
-  check('product_image')
-    .isEmpty()
-    .withMessage('Favor de seleccionar una imagen'),
+
+  //***IMAGE VALIDATION CUSTOM ***/
+  body('product_image').custom((value, { req }) => {
+    let file = req.file;
+
+    if (!file) {
+      throw new Error('Favor de cargar una imagen');
+    } else {
+      let acceptedExtensions = ['.jpg', '.png', '.gif'];
+      let fileExtension = path.extname(file.originalname);
+      if (!acceptedExtensions.includes(fileExtension)) {
+        throw new Error(
+          `Favor de cargar un formato permitido: ${acceptedExtensions.join(', ')}`
+        );
+      }
+    }
+
+    return true;
+  }),
 ];
 
 /*** GET ALL PRODUCTS ***/
@@ -58,7 +77,8 @@ router.get('/', productsController.list);
 router.get('/create', productsController.create);
 router.post(
   '/create',
-  [uploadFile.single('product_image'), validateRegister],
+  uploadFile.single('product_image'),
+  validateRegister,
   productsController.store
 );
 
